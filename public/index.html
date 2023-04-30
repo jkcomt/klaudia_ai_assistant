@@ -1,0 +1,167 @@
+<!DOCTYPE html >
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat-Ito Speach to Text</title>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- CSS -->
+    <link rel="stylesheet" href="./css/style.css">
+  </head>
+  
+  <body>
+    <!-- MODAL Begin -->
+    <div class="modal fade" id="askNameModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Asistente IA</h5>
+          </div>
+          <div class="modal-body row">
+            <div class="col-md-6 text-center">
+              <img src="img/00067-578282106.png" height="200px" alt="..." class="rounded-circle">
+            </div>
+            <div class="col-md-6 mt-3">
+              <h4>KlaudIA</h4>
+              <p>
+                ¡Hola! soy tu asistente virtual. Antes de poder ayudarte, por favor dime tu nombre:
+              </p>
+              <div class="form-group">
+                <input id="txtUserName" type="text" class="form-control" id="recipient-name" placeholder="Ricardo...">
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button id="btnSendName" type="button" class="btn btn-primary btn-sm" data-dismiss="modal" disabled="true">Enviar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- MODAL End Ask Name-->
+    <!-- MODAL Begin -->
+    <div class="modal fade" id="countDownModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Dime tu consulta</h5>
+          </div>
+          <div class="modal-body row">            
+            <div class="col-md-12">  
+              <div id="clock">
+                <span id="seconds" class="text-center">30</span>
+              </div>            
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button id="btnStopRecording" type="button" class="btn btn-primary btn-block btn-sm" data-dismiss="modal">Enviar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- MODAL End Ask Name-->
+    <!-- MODAL Begin Assitant INFO -->
+    <div class="modal fade" id="assistantModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Asistente IA</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body row">
+            <div class="col-md-6 text-center">
+              <img src="img/00067-578282106.png" height="200px" alt="..." class="rounded-circle">
+            </div>
+            <div class="col-md-6 mt-3">
+              <h4>KlaudIA</h4>
+              <p>
+                Soy una asistente virtual, entrenada para responder lo mejor posible a tus consultas.
+                Por favor, no dudes en preguntarme lo que necesites, siempre estaré para atenderte.
+              </p>              
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Volver</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- MODAL end -->
+
+    <div class="container-fluid mb-10 mh-100 p-0">
+      <div class="page-content page-container" id="page-content">
+        <div class="">
+          <div class="container d-flex justify-content-center p-0">
+            <div class="col-md-12">
+              <div class="card card-bordered">
+                <div class="card-header">
+                  <h4 class="card-title"><strong>Chat</strong></h4>
+                </div>
+
+                <div
+                  class="ps-container ps-theme-default ps-active-y"
+                  id="chat-content"
+                  style="overflow-y: scroll !important; height: 80vh !important">
+
+                  <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px">
+                    <div
+                      class="ps-scrollbar-x"
+                      tabindex="0"
+                      style="left: 0px; width: 0px"
+                    ></div>
+                  </div>
+                  <div
+                    class="ps-scrollbar-y-rail"
+                    style="top: 0px; height: 0px; right: 2px"
+                  >
+                    <div
+                      class="ps-scrollbar-y"
+                      tabindex="0"
+                      style="top: 0px; height: 2px"
+                    ></div>
+                  </div>
+                </div>
+
+                <div class="publisher bt-1 border-light">
+                  <img
+                    class="avatar avatar-xs"
+                    src="https://img.icons8.com/color/36/000000/administrator-male.png"
+                    alt="..."
+                  />
+                  <a
+                    class="publisher-btn text-info text-center"
+                    href="#"
+                    data-abc="true"
+                  >
+                  </a>
+                  <button id="btnStart" type="button" class="btn btn-primary btn-block">
+                    Pulsa para Hablar <i class="fa fa-microphone"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/audio.js"></script>
+</html>
