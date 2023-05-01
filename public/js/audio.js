@@ -2,15 +2,17 @@ const synth = window.speechSynthesis;
 const audioChunks = [];
 const btnSendName = document.getElementById("btnSendName");
 const btnStart    = document.getElementById("btnStart");
+const btnCloseChat    = document.getElementById("btnCloseChat");
 const btnStopRecording = document.getElementById("btnStopRecording");
 const txtUserName = document.getElementById("txtUserName");
 const chatContent = document.getElementById("chat-content");
-let mediaRecorder;
 
+let mediaRecorder;
 let userName = "Guest";
 let timeLeft = 30;
 let socket = null;
-//Active modal to ask username
+
+//Modal para obtener nombre del usuario
 $('#askNameModalCenter').modal('show');
 
 //Captura el input de username
@@ -22,10 +24,11 @@ txtUserName.addEventListener("keyup",()=>{
     }
 });
 
-//Guarda el username
-btnSendName.addEventListener("click",()=>{
+//Guarda el username y conecta el socket
+btnSendName.addEventListener("click",async ()=>{
     userName = txtUserName.value;
     textToSpeach(`Hola ${userName}. ¿En qué puedo ayudarte?`);
+    connectarSocket();
 });
 
 //Inicia el tiempo de grabación
@@ -38,12 +41,20 @@ btnStart.addEventListener("click", () => {
     audioChunks.length = 0;
     mediaRecorder.start();
 });
+
 //Detiene la grabación
 btnStopRecording.addEventListener("click",()=>{
     timeLeft=0;
     btnStart.disabled = false;
 });
 
+//Cerrar Chat
+btnCloseChat.addEventListener("click",()=>{
+    socket.disconnect();
+    location.reload();
+});
+
+//Gestiona el audio
 const handleSuccess = (stream) => {
     mediaRecorder = new MediaRecorder(stream);
 
@@ -68,7 +79,8 @@ const handleSuccess = (stream) => {
         })
     });
 }
-//captura el audio grabado del micro
+
+//Captura el audio grabado del micro
 navigator.mediaDevices.getUserMedia({ audio: true }).then(handleSuccess);
 
 //Lee el texto y lo asigna a la vista del chat
@@ -94,7 +106,7 @@ const countdown= ()=>{
     }
 };
 
-// Items de chat
+// Items de chat | Respuesta de IA
 const answerIA=(message)=>{    
     let item = `<div class="media media-chat" data-toggle="modal" data-target="#assistantModalCenter">
                     <img
@@ -110,6 +122,7 @@ const answerIA=(message)=>{
     return item;
 }
 
+// Items de chat | Respuesta de Usuario
 const answerUser=(message)=>{
     let item = `<div class="media media-chat media-chat-reverse">
                     <img
@@ -126,10 +139,10 @@ const answerUser=(message)=>{
 }
 
 //sockets
-const connectarSocket = async()=>{
+const connectarSocket = ()=>{
 
     socket = io();
-
+    
     socket.on('connect',()=>{
        console.log('Sockets online');
     });
@@ -146,5 +159,3 @@ const connectarSocket = async()=>{
         textToSpeach(`${userName}. ${completion.messages.content}`);
     });
 }
-
-connectarSocket();
