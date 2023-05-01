@@ -12,7 +12,7 @@ KlaudIA es una WebApp basada en NodeJS que usa las API's de Whisper y ChatComple
 
 ## Contacto
 
-Me puedes encontrar en [Twitter](https://twitter.com/RicDiazDev) y en [Youtube](https://www.youtube.com/channel/UCA7lL7238OSQ-71KSJ01oMQ), Creo contenido en español pero entiendo bien el ingles ¡Envía Saludos!
+Me puedes encontrar en [Twitter](https://twitter.com/RicDiazDev) y en [Youtube](https://www.youtube.com/channel/UCA7lL7238OSQ-71KSJ01oMQ). Creo contenido en español pero entiendo bien el ingles ¡Envía Saludos!
 
  
 
@@ -30,7 +30,7 @@ KlaudIA is a NodeJS WebApp that use Whisper and ChatCompletion api's from OpenAI
 
 ## Contact
 
-You can find me on [Twitter](https://twitter.com/RicDiazDev) and [Youtube](https://www.youtube.com/channel/UCA7lL7238OSQ-71KSJ01oMQ), I create content in spanish but I can understand english too ¡Say Hi!
+You can find me on [Twitter](https://twitter.com/RicDiazDev) and [Youtube](https://www.youtube.com/channel/UCA7lL7238OSQ-71KSJ01oMQ). I create content in spanish but I can understand english too ¡Say Hi!
 
 
 
